@@ -1,0 +1,100 @@
+.tarot-page {
+  --newit-navy: #1a2b44;
+  --newit-navy-deep: #0f1a2e;
+  --newit-gold: #c5a059;
+  --tarot-cream: #f5f0e8;
+  --tarot-muted: #9aa8bc;
+  --tarot-card: rgba(26, 43, 68, 0.65);
+  flex: 1;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(
+    180deg,
+    var(--newit-navy-deep) 0%,
+    #141e30 45%,
+    var(--newit-navy-deep) 100%
+  );
+  color: var(--tarot-cream);
+}
+
+.tarot-page h1,
+.tarot-page h2,
+.tarot-page h3,
+.tarot-page p,
+.tarot-page li,
+.tarot-page dt,
+.tarot-page dd,
+.tarot-page span,
+.tarot-page a:not(.tarot-btn-primary) {
+  color: inherit;
+}
+
+.tarot-page .tarot-mesh {
+  background-image:
+    radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      rgba(197, 160, 89, 0.14),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 90% 90%,
+      rgba(155, 126, 200, 0.08),
+      transparent
+    );
+}
+
+.tarot-gold-text {
+  color: var(--newit-gold);
+}
+
+.tarot-btn-primary {
+  background: var(--newit-gold);
+  color: var(--newit-navy-deep);
+  font-weight: 600;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+
+.tarot-btn-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.tarot-card-surface {
+  background: var(--tarot-card);
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  backdrop-filter: blur(10px);
+}
+
+.tarot-tab-active {
+  background: var(--newit-gold);
+  color: var(--newit-navy-deep);
+  border-color: var(--newit-gold);
+}
+
+.tarot-tab-inactive {
+  background: transparent;
+  color: var(--tarot-muted);
+  border-color: rgba(197, 160, 89, 0.35);
+}
+
+.tarot-tab-inactive:hover {
+  color: var(--tarot-cream);
+  border-color: var(--newit-gold);
+}
+
+.tarot-fade-in {
+  animation: tarotFadeIn 0.35s ease-out;
+}
+
+@keyframes tarotFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

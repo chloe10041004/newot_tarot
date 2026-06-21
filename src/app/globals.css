@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #e8845c;
+  --primary-active: #d06f48;
+  --on-primary: #ffffff;
+  --ink: #6b5b95;
+  --body: #4a4458;
+  --mute: #8a8494;
+  --hairline: #e8ddd0;
+  --hairline-strong: #c9b8a8;
+  --canvas: #fffaf0;
+  --canvas-soft: #fff9e3;
+  --canvas-soft-2: #f5ede0;
+  --link: #6b5b95;
+  --link-deep: #524673;
+  --link-bg-soft: #f4e8f0;
+  --terracotta: #e8845c;
+  --dusty-pink: #f4b4c4;
+  --cream: #fff9e3;
+  --lavender-ink: #6b5b95;
+  --stripe-pink: #f4b4c4;
+  --stripe-yellow: #f5e6a8;
+  --brand-peach: #ffb084;
+  --brand-lavender: #b8a4ed;
+  --brand-pink: #ff4d8b;
+  --surface-dark: #6b5b95;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: var(--primary);
+  --color-primary-active: var(--primary-active);
+  --color-on-primary: var(--on-primary);
+  --color-ink: var(--ink);
+  --color-body: var(--body);
+  --color-mute: var(--mute);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-canvas: var(--canvas);
+  --color-canvas-soft: var(--canvas-soft);
+  --color-canvas-soft-2: var(--canvas-soft-2);
+  --color-link: var(--link);
+  --color-link-deep: var(--link-deep);
+  --color-link-bg-soft: var(--link-bg-soft);
+  --color-terracotta: var(--terracotta);
+  --color-dusty-pink: var(--dusty-pink);
+  --color-cream: var(--cream);
+  --color-lavender-ink: var(--lavender-ink);
+  --color-brand-peach: var(--brand-peach);
+  --color-brand-lavender: var(--brand-lavender);
+  --color-brand-pink: var(--brand-pink);
+  --color-surface-dark: var(--surface-dark);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-inter), "Noto Sans KR", system-ui, -apple-system,
+    sans-serif;
+}
+
+::selection {
+  background: var(--lavender-ink);
+  color: #fff;
+}
+
+.book-stripe-bg {
+  background-color: var(--cream);
+  background-image: repeating-linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--stripe-pink) 55%, transparent) 0,
+    color-mix(in srgb, var(--stripe-pink) 55%, transparent) 2px,
+    transparent 2px,
+    transparent 14px
+  );
+}
+
+.hero-text-panel {
+  background: color-mix(in srgb, var(--canvas) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--hairline);
+  border-radius: 1rem;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 4px 24px color-mix(in srgb, var(--lavender-ink) 6%, transparent);
+}
+
+.book-stripe-h {
+  background-image: repeating-linear-gradient(
+    0deg,
+    var(--stripe-yellow) 0,
+    var(--stripe-yellow) 2px,
+    transparent 2px,
+    transparent 10px
+  );
+}
+
+.book-pill {
+  border-radius: 9999px 9999px 9999px 0;
+}
+
+.title-grid {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 0.25rem 0.75rem;
+  letter-spacing: 0.15em;
+}
+
+.card-snap-x {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.card-snap-x > * {
+  scroll-snap-align: start;
 }
