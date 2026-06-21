@@ -36,7 +36,9 @@ export default function TarotPage() {
     <div
       className={`tarot-page ${notoSansKr.variable} flex min-h-screen w-full flex-col font-[family-name:var(--font-noto-sans-kr),system-ui,sans-serif] text-[#f5f0e8]`}
     >
-      <TarotHeader />
+      <Suspense fallback={<header className="tarot-header-soft sticky top-0 z-50 h-[65px]" />}>
+        <TarotHeader />
+      </Suspense>
       <main>
         <Suspense fallback={<div className="px-6 py-20 text-center">로딩 중…</div>}>
           <TarotPageContent />

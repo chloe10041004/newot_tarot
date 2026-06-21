@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   tarotClasses,
   type TarotClassProduct,
 } from "@/data/tarotClasses";
-import { FloatingEnrollButton } from "./FloatingEnrollButton";
 import { TarotFooter } from "./TarotFooter";
 
 function ClassTabs({
@@ -42,35 +41,35 @@ function HeroSection({ product }: { product: TarotClassProduct }) {
     <section className="tarot-mesh relative px-6 pb-20 pt-14 md:pb-28 md:pt-20">
       <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="tarot-fade-in">
-          <p className="tarot-badge mb-5 inline-flex items-center gap-2 px-4 py-2 text-sm">
-            <span className="text-base" aria-hidden>✦</span>
+          <p className="tarot-badge mb-4 inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium">
+            <span className="text-sm" aria-hidden>✦</span>
             {product.badge}
           </p>
-          <p className="mb-3 text-sm tracking-wide text-[var(--tarot-muted)]">
+          <p className="tarot-hero-eyebrow mb-4 text-xs font-light tracking-wide text-[var(--tarot-muted)] md:text-sm">
             {product.projectName}
           </p>
-          <h1 className="tarot-section-title mb-5 text-2xl md:text-3xl lg:text-[2rem]">
+          <h1 className="tarot-hero-title mb-5 text-2xl font-bold leading-[1.25] tracking-tight md:text-3xl lg:text-4xl">
             {product.title}
           </h1>
-          <p className="tarot-gold-text mb-4 text-lg leading-[1.7] md:text-xl">
+          <p className="tarot-hero-hook mb-4 text-lg font-bold leading-[1.4] text-[var(--newit-gold)] md:text-2xl lg:text-[1.75rem]">
             {product.hook}
           </p>
           {product.hookSub && (
-            <p className="tarot-section-sub mb-8 text-sm md:text-base">
+            <p className="tarot-hero-sub mb-8 text-xs font-light leading-[1.8] text-[var(--tarot-muted)] md:text-sm">
               {product.hookSub}
             </p>
           )}
-          <p className="mb-8 text-2xl font-semibold text-[var(--newit-gold)]">
+          <p className="mb-8 text-xl font-bold text-[var(--newit-gold)] md:text-2xl">
             {product.classInfo.price}
             {product.classInfo.priceNote && (
-              <span className="mt-1 block text-sm font-normal text-[var(--tarot-muted)]">
+              <span className="mt-1.5 block text-xs font-light text-[var(--tarot-muted)] md:text-sm">
                 {product.classInfo.priceNote}
               </span>
             )}
           </p>
           <a
             href="#enroll"
-            className="tarot-btn-primary inline-flex h-12 items-center rounded-full px-6 text-sm md:text-base"
+            className="tarot-btn-primary inline-flex h-11 items-center rounded-full px-5 text-sm font-semibold md:h-12 md:px-6 md:text-base"
           >
             {product.ctaLabel}
           </a>
@@ -177,10 +176,10 @@ function TransformSection({ product }: { product: TarotClassProduct }) {
               <span className="mb-5 inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#e8d5a8] to-[#c5a059] text-sm font-semibold text-[var(--newit-navy-deep)]">
                 {i + 1}
               </span>
-              <h3 className="mb-3 text-base font-medium text-[var(--newit-gold)]">
+              <h3 className="mb-3 text-base font-bold text-[var(--newit-gold)] md:text-lg">
                 {t.title}
               </h3>
-              <p className="text-sm leading-[1.75] text-[var(--tarot-muted)]">
+              <p className="text-xs font-light leading-[1.75] text-[var(--tarot-muted)] md:text-sm">
                 {t.description}
               </p>
             </li>
@@ -259,38 +258,55 @@ function CurriculumSection({ product }: { product: TarotClassProduct }) {
 function ComparisonSection({ product }: { product: TarotClassProduct }) {
   if (!product.comparisonTable) return null;
   const { headers, rows } = product.comparisonTable;
+  const tarotName = headers[1] ?? "타로";
+  const lenormandName = headers[2] ?? "레노먼드";
 
   return (
-    <section className="tarot-section-alt px-6 py-20 md:py-24">
-      <div className="mx-auto max-w-3xl">
-        <h2 className="tarot-section-title mb-10 text-center text-xl md:text-2xl">
-          타로 vs 레노먼드
-        </h2>
-        <ul className="space-y-4">
-          {rows.map((row) => (
-            <li key={row[0]} className="tarot-compare-card">
-              <p className="mb-2 text-sm font-medium text-[var(--newit-gold)]">
-                {row[0]}
-              </p>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div>
-                  <p className="mb-1 text-xs text-[var(--tarot-muted)]">
-                    {headers[1]}
-                  </p>
-                  <p className="text-sm leading-relaxed">{row[1]}</p>
-                </div>
-                <div>
-                  <p className="mb-1 text-xs text-[var(--tarot-muted)]">
-                    {headers[2]}
-                  </p>
-                  <p className="text-sm leading-relaxed text-[var(--newit-gold)]">
-                    {row[2]}
-                  </p>
-                </div>
+    <section className="tarot-section-alt px-4 py-20 sm:px-6 md:py-24">
+      <div className="tarot-vs-wrap">
+        <div className="text-center">
+          <span className="tarot-vs-badge">CHECK POINT</span>
+          <h2 className="tarot-vs-title">
+            타로 <em>VS</em> 레노먼드
+          </h2>
+          <p className="tarot-section-sub mx-auto mt-3 max-w-sm text-sm">
+            무엇이 나에게 맞을까? 한눈에 비교해 보세요
+          </p>
+        </div>
+
+        <div className="tarot-vs-columns">
+          {/* Left: Universal Waite Tarot */}
+          <div className="tarot-vs-col tarot-vs-col-left">
+            <div className="tarot-vs-col-header">{tarotName}</div>
+            <div className="tarot-vs-col-body">
+              <div className="tarot-vs-icon" aria-hidden>
+                🃏
               </div>
-            </li>
-          ))}
-        </ul>
+              {rows.map(([label, tarot]) => (
+                <div key={`tarot-${label}`} className="tarot-vs-row">
+                  <span className="tarot-vs-row-label">{label}</span>
+                  {tarot}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: Lenormand (featured) */}
+          <div className="tarot-vs-col tarot-vs-col-right">
+            <div className="tarot-vs-col-header">{lenormandName}</div>
+            <div className="tarot-vs-col-body">
+              <div className="tarot-vs-icon" aria-hidden>
+                ✦
+              </div>
+              {rows.map(([label, , lenormand]) => (
+                <div key={`lenormand-${label}`} className="tarot-vs-row">
+                  <span className="tarot-vs-row-label">{label}</span>
+                  {lenormand}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -417,6 +433,7 @@ function ClassContent({ product }: { product: TarotClassProduct }) {
 
 export function TarotPageContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const initial =
     searchParams.get("class") === "lenormand" ? "lenormand" : "tuesday";
   const [activeId, setActiveId] = useState(initial);
@@ -424,12 +441,13 @@ export function TarotPageContent() {
   const product =
     tarotClasses.find((c) => c.id === activeId) ?? tarotClasses[0];
 
-  const handleTabChange = useCallback((id: string) => {
-    setActiveId(id);
-    const url = new URL(window.location.href);
-    url.searchParams.set("class", id);
-    window.history.replaceState({}, "", url.toString());
-  }, []);
+  const handleTabChange = useCallback(
+    (id: string) => {
+      setActiveId(id);
+      router.replace(`/tarot?class=${id}`, { scroll: false });
+    },
+    [router],
+  );
 
   useEffect(() => {
     const param = searchParams.get("class");
@@ -442,7 +460,6 @@ export function TarotPageContent() {
     <>
       <ClassTabs activeId={activeId} onChange={handleTabChange} />
       <ClassContent product={product} />
-      <FloatingEnrollButton product={product} />
       <TarotFooter />
     </>
   );

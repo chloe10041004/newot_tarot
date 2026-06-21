@@ -1,7 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export function TarotHeader() {
+  const searchParams = useSearchParams();
+  const isLenormand = searchParams.get("class") === "lenormand";
+  const ctaLabel = isLenormand ? "무료 수강 신청" : "수강 신청";
+
   return (
     <header className="tarot-header-soft sticky top-0 z-50">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -22,7 +29,7 @@ export function TarotHeader() {
           href="#enroll"
           className="tarot-btn-primary rounded-full px-5 py-2.5 text-sm"
         >
-          수강 신청
+          {ctaLabel}
         </a>
       </div>
     </header>
