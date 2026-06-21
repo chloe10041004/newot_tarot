@@ -18,14 +18,14 @@ function ClassTabs({
   onChange: (id: string) => void;
 }) {
   return (
-    <div className="sticky top-[57px] z-40 border-b border-[rgba(197,160,89,0.12)] bg-[#0f1a2e]/95 px-6 py-3 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl justify-center gap-2">
+    <div className="tarot-header-soft sticky top-[65px] z-40 px-6 py-4">
+      <div className="mx-auto flex max-w-6xl justify-center gap-3">
         {tarotClasses.map((c) => (
           <button
             key={c.id}
             type="button"
             onClick={() => onChange(c.id)}
-            className={`rounded-full border px-5 py-2 text-sm font-medium transition-colors ${
+            className={`rounded-full border px-6 py-2.5 text-sm font-medium transition-all duration-300 ${
               activeId === c.id ? "tarot-tab-active" : "tarot-tab-inactive"
             }`}
           >
@@ -39,28 +39,28 @@ function ClassTabs({
 
 function HeroSection({ product }: { product: TarotClassProduct }) {
   return (
-    <section className="tarot-mesh px-6 pb-16 pt-12 md:pb-24 md:pt-16">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-14">
+    <section className="tarot-mesh relative px-6 pb-20 pt-14 md:pb-28 md:pt-20">
+      <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="tarot-fade-in">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[rgba(197,160,89,0.35)] px-4 py-1.5 text-sm text-[var(--newit-gold)]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--newit-gold)]" />
+          <p className="tarot-badge mb-5 inline-flex items-center gap-2 px-4 py-2 text-sm">
+            <span className="text-base" aria-hidden>✦</span>
             {product.badge}
           </p>
-          <p className="mb-2 text-sm text-[var(--tarot-muted)]">
+          <p className="mb-3 text-sm tracking-wide text-[var(--tarot-muted)]">
             {product.projectName}
           </p>
-          <h1 className="mb-4 text-2xl font-bold leading-snug tracking-tight md:text-3xl lg:text-4xl">
+          <h1 className="tarot-section-title mb-5 text-2xl md:text-3xl lg:text-[2rem]">
             {product.title}
           </h1>
-          <p className="tarot-gold-text mb-4 text-lg font-medium leading-relaxed md:text-xl">
+          <p className="tarot-gold-text mb-4 text-lg leading-[1.7] md:text-xl">
             {product.hook}
           </p>
           {product.hookSub && (
-            <p className="mb-6 text-sm leading-relaxed text-[var(--tarot-muted)] md:text-base">
+            <p className="tarot-section-sub mb-8 text-sm md:text-base">
               {product.hookSub}
             </p>
           )}
-          <p className="mb-6 text-2xl font-bold text-[var(--newit-gold)]">
+          <p className="mb-8 text-2xl font-semibold text-[var(--newit-gold)]">
             {product.classInfo.price}
             {product.classInfo.priceNote && (
               <span className="mt-1 block text-sm font-normal text-[var(--tarot-muted)]">
@@ -76,16 +76,16 @@ function HeroSection({ product }: { product: TarotClassProduct }) {
           </a>
         </div>
         <div className="relative flex justify-center lg:justify-end">
-          <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden rounded-2xl border border-[rgba(197,160,89,0.25)] shadow-2xl">
+          <div className="tarot-hero-frame relative aspect-[4/3] w-full max-w-md overflow-hidden">
             <Image
               src={product.heroImage}
               alt={`${product.title} 비주얼`}
               fill
-              className="object-cover"
+              className="object-cover scale-105 transition-transform duration-700 hover:scale-100"
               sizes="(max-width: 1024px) 90vw, 400px"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0f1a2e]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#121c30]/50 via-transparent to-transparent" />
           </div>
         </div>
       </div>
@@ -95,21 +95,22 @@ function HeroSection({ product }: { product: TarotClassProduct }) {
 
 function PainSection({ product }: { product: TarotClassProduct }) {
   return (
-    <section className="px-6 py-16 md:py-20">
+    <section className="tarot-section-alt px-6 py-20 md:py-24">
       <div className="mx-auto max-w-3xl">
-        <h2 className="mb-6 text-center text-2xl font-bold md:text-3xl">
+        <div className="tarot-divider mb-6" />
+        <h2 className="tarot-section-title mb-3 text-center text-xl md:text-2xl">
           이런 고민, 있으시죠?
         </h2>
         {product.painStory && (
-          <p className="mb-8 text-center text-[var(--tarot-muted)]">
+          <p className="tarot-section-sub mb-10 text-center text-sm md:text-base">
             {product.painStory}
           </p>
         )}
-        <ul className="space-y-4">
+        <ul className="space-y-5">
           {product.painPoints.map((point) => (
             <li
               key={point.slice(0, 24)}
-              className="tarot-card-surface rounded-xl p-5 text-sm leading-relaxed md:text-base"
+              className="tarot-quote-card text-sm leading-[1.8] md:text-base"
             >
               {point}
             </li>
@@ -122,27 +123,27 @@ function PainSection({ product }: { product: TarotClassProduct }) {
 
 function SolutionSection({ product }: { product: TarotClassProduct }) {
   return (
-    <section className="px-6 py-16 md:py-20">
+    <section className="px-6 py-20 md:py-24">
       <div className="mx-auto max-w-3xl">
-        <h2 className="tarot-gold-text mb-4 text-center text-2xl font-bold md:text-3xl">
+        <h2 className="tarot-gold-text tarot-section-title mb-6 text-center text-xl md:text-2xl">
           {product.solution.lead}
         </h2>
-        <div className="space-y-4">
+        <div className="space-y-5">
           {product.solution.paragraphs.map((p) => (
             <p
               key={p.slice(0, 30)}
-              className="text-center text-sm leading-relaxed text-[var(--tarot-muted)] md:text-base"
+              className="tarot-section-sub text-center text-sm md:text-base"
             >
               {p}
             </p>
           ))}
         </div>
         {product.solution.bullets && (
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2">
             {product.solution.bullets.map((b) => (
               <li
                 key={b}
-                className="tarot-card-surface rounded-lg px-4 py-3 text-sm"
+                className="tarot-card-surface px-5 py-4 text-sm leading-relaxed"
               >
                 {b}
               </li>
@@ -161,24 +162,25 @@ function TransformSection({ product }: { product: TarotClassProduct }) {
       : "수강 직후, 이렇게 달라집니다";
 
   return (
-    <section className="px-6 py-16 md:py-20">
+    <section className="tarot-section-alt px-6 py-20 md:py-24">
       <div className="mx-auto max-w-6xl">
-        <h2 className="mb-10 text-center text-2xl font-bold md:text-3xl">
+        <div className="tarot-divider mb-6" />
+        <h2 className="tarot-section-title mb-12 text-center text-xl md:text-2xl">
           {heading}
         </h2>
         <ul className="grid gap-6 md:grid-cols-3">
           {product.transformations.map((t, i) => (
             <li
               key={t.title}
-              className="tarot-card-surface rounded-2xl p-6"
+              className="tarot-card-surface p-7"
             >
-              <span className="mb-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-[var(--newit-gold)] text-sm font-bold text-[var(--newit-navy-deep)]">
+              <span className="mb-5 inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#e8d5a8] to-[#c5a059] text-sm font-semibold text-[var(--newit-navy-deep)]">
                 {i + 1}
               </span>
-              <h3 className="mb-2 text-lg font-semibold text-[var(--newit-gold)]">
+              <h3 className="mb-3 text-base font-medium text-[var(--newit-gold)]">
                 {t.title}
               </h3>
-              <p className="text-sm leading-relaxed text-[var(--tarot-muted)]">
+              <p className="text-sm leading-[1.75] text-[var(--tarot-muted)]">
                 {t.description}
               </p>
             </li>
@@ -191,12 +193,12 @@ function TransformSection({ product }: { product: TarotClassProduct }) {
 
 function CurriculumSection({ product }: { product: TarotClassProduct }) {
   return (
-    <section className="px-6 py-16 md:py-20">
+    <section className="px-6 py-20 md:py-24">
       <div className="mx-auto max-w-6xl">
-        <h2 className="mb-4 text-center text-2xl font-bold md:text-3xl">
+        <h2 className="tarot-section-title mb-4 text-center text-xl md:text-2xl">
           커리큘럼
         </h2>
-        <p className="mx-auto mb-10 max-w-2xl text-center text-sm text-[var(--tarot-muted)] md:text-base">
+        <p className="tarot-section-sub mx-auto mb-12 max-w-2xl text-center text-sm md:text-base">
           {product.curriculumIntro}
         </p>
 
@@ -205,7 +207,7 @@ function CurriculumSection({ product }: { product: TarotClassProduct }) {
             {product.curriculumWeeks.map((week) => (
               <li
                 key={week.week}
-                className="tarot-card-surface rounded-2xl p-6 md:p-8"
+                className="tarot-card-surface p-7 md:p-8"
               >
                 <div className="mb-4 flex flex-wrap items-baseline gap-2">
                   <span className="text-sm font-semibold text-[var(--newit-gold)]">
@@ -234,7 +236,7 @@ function CurriculumSection({ product }: { product: TarotClassProduct }) {
             {product.curriculumBlocks.map((block) => (
               <li
                 key={block.title}
-                className="tarot-card-surface flex flex-col gap-3 rounded-2xl p-6 sm:flex-row sm:items-start sm:gap-6"
+                className="tarot-card-surface flex flex-col gap-4 p-7 sm:flex-row sm:items-start sm:gap-6"
               >
                 <span className="shrink-0 rounded-full bg-[var(--newit-gold)] px-3 py-1 text-sm font-bold text-[var(--newit-navy-deep)]">
                   {block.time}
@@ -259,39 +261,36 @@ function ComparisonSection({ product }: { product: TarotClassProduct }) {
   const { headers, rows } = product.comparisonTable;
 
   return (
-    <section className="px-6 py-16 md:py-20">
-      <div className="mx-auto max-w-4xl overflow-x-auto">
-        <h2 className="mb-8 text-center text-2xl font-bold md:text-3xl">
+    <section className="tarot-section-alt px-6 py-20 md:py-24">
+      <div className="mx-auto max-w-3xl">
+        <h2 className="tarot-section-title mb-10 text-center text-xl md:text-2xl">
           타로 vs 레노먼드
         </h2>
-        <table className="w-full min-w-[480px] border-collapse text-sm">
-          <thead>
-            <tr>
-              {headers.map((h) => (
-                <th
-                  key={h}
-                  className="border border-[rgba(197,160,89,0.25)] bg-[rgba(197,160,89,0.12)] px-4 py-3 text-left font-semibold"
-                >
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row) => (
-              <tr key={row[0]}>
-                {row.map((cell, i) => (
-                  <td
-                    key={`${row[0]}-${i}`}
-                    className="border border-[rgba(197,160,89,0.15)] px-4 py-3 text-[var(--tarot-muted)]"
-                  >
-                    {cell}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <ul className="space-y-4">
+          {rows.map((row) => (
+            <li key={row[0]} className="tarot-compare-card">
+              <p className="mb-2 text-sm font-medium text-[var(--newit-gold)]">
+                {row[0]}
+              </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div>
+                  <p className="mb-1 text-xs text-[var(--tarot-muted)]">
+                    {headers[1]}
+                  </p>
+                  <p className="text-sm leading-relaxed">{row[1]}</p>
+                </div>
+                <div>
+                  <p className="mb-1 text-xs text-[var(--tarot-muted)]">
+                    {headers[2]}
+                  </p>
+                  <p className="text-sm leading-relaxed text-[var(--newit-gold)]">
+                    {row[2]}
+                  </p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
@@ -307,12 +306,13 @@ function ClassInfoSection({ product }: { product: TarotClassProduct }) {
   ];
 
   return (
-    <section className="px-6 py-16 md:py-20">
+    <section className="px-6 py-20 md:py-24">
       <div className="mx-auto max-w-3xl">
-        <h2 className="mb-8 text-center text-2xl font-bold md:text-3xl">
+        <div className="tarot-divider mb-6" />
+        <h2 className="tarot-section-title mb-10 text-center text-xl md:text-2xl">
           클래스 안내
         </h2>
-        <dl className="tarot-card-surface divide-y divide-[rgba(197,160,89,0.15)] rounded-2xl">
+        <dl className="tarot-card-surface divide-y divide-[rgba(212,184,122,0.1)] overflow-hidden">
           {items.map((item) => (
             <div
               key={item.label}
@@ -334,9 +334,9 @@ function ClassInfoSection({ product }: { product: TarotClassProduct }) {
 
 function EnrollSection({ product }: { product: TarotClassProduct }) {
   return (
-    <section id="enroll" className="scroll-mt-28 px-6 py-16 md:py-20">
+    <section id="enroll" className="tarot-section-alt scroll-mt-28 px-6 py-20 md:py-28">
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="mb-4 text-2xl font-bold md:text-3xl">수강 신청</h2>
+        <h2 className="tarot-section-title mb-5 text-xl md:text-2xl">수강 신청</h2>
         {product.enrollment.selectiveNote && (
           <p className="mb-4 text-sm text-[var(--newit-gold)]">
             {product.enrollment.selectiveNote}

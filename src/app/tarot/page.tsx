@@ -13,6 +13,11 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000",
+  ),
   title: "뉴잇 타로 클래스 | NEWIT Academy",
   description:
     "뉴잇아카데미 썸머나이트 타로 클래스. 화요 힐링반 4주 과정과 레노먼드 원데이 무료 클래스. 대구 뉴잇(소율타로사주) · Zoom 동시 송출.",
